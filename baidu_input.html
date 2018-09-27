@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style type="text/css">
+    	p:hover{
+    		background-color:rgba(0,145,219,0.3);
+    	}
+    	.form-control{
+    		height: 50px;
+    		width: 500px;
+    	}
+    	.form-control2{
+    		border: 1px solid rgba(0,0,0,0.2);
+    		width: 500px;
+    		resize: none;
+    		border-radius: 5px;
+    		display: none;
+    	}
+    	#box{
+    		height: auto;
+    		width: 600px;
+    		position: relative;
+    		margin: 100px auto;
+    	}
+    	.btn{
+    		height: 50px;
+    		width: 80px;
+    		position: absolute;
+    		right: 0px;
+    		top: 0px;
+    	}
+    </style>
+</head>
+<body>
+	<div id="box">
+	<input type="text" class="form-control" placeholder="百度一下,你就知道">
+	<div class="form-control2">
+	</div>
+	<button type="button" class="btn btn-info">百度一下</button>
+	</div>
+    <script src="jsonp.js"></script>
+    <script>
+    	var $inp = document.querySelector('.form-control');
+    	var $text = document.querySelector('.form-control2');
+    	$inp.oninput = function (){
+    		var val = $inp.value;
+    		var params = {
+    		    wd: val, 
+    		    cb: "getBaiduParams"
+    		}
+    		$text.style.display = 'block';	
+    		jsonp('https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su', params);
+    	}
+        function getBaiduParams (data) {
+            var arr = data.s;
+            $text.innerHTML = null;
+            for (var i = 0 ; i < arr.length ; i++) {
+            	var $a = document.createElement('p');
+            	$a.innerHTML = arr[i];
+            	$a.style.display = 'block';
+            	$a.style.width = 500 + 'px';
+            	var arr2 = ['https://www.youku.com',
+            	'https://www.baidu.com','https://www.tudou.com','http://www.lvse.com/',
+            	]
+            	var c = Math.round(Math.random() * (arr2.length - 1));
+            	$a.style.textDecoration = 'none';
+            	$text.appendChild($a);
+            	$a.onclick = function(){
+            	$inp.value = this.innerHTML;
+            	}
+            }
+            var _this = this;
+            document.onclick = function(e){
+            	e = e || window.event;
+            	if(e.target !== _this.$inp){
+            		$text.innerHTML = null;
+            	}
+            }
+         
+        }
+        
+    
+    
+    </script>
+</body>
+</html>
