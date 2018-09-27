@@ -1,2 +1,2 @@
-# baidu_search
-简单的百度搜索栏
+#baidu_search
+新手练习搜索框。。
