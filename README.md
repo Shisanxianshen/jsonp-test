@@ -1,2 +1,1 @@
-#baidu_search
-新手练习搜索框。。
+jsonp解决跨域的例子
